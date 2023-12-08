@@ -1,26 +1,36 @@
 import Lists from "../../atoms/lists/lists"
+import tipoTarefas from "../../interfaces";
 import './style.scss'
 
-interface asideProps{
-    tarefas: Array<{
-        tarefa: string;
-        tempo: string;
-        selecionado:boolean;
-        completado:boolean;
-        id:string;
-      }>;
+
+interface AsideProps {
+    tarefas: tipoTarefas[],
+    selecionaTarefa: (tarefaSelecionada:tipoTarefas)=>void;
+    
 }
-const Aside: React.FC<asideProps> = ({tarefas})=>{
-    console.log(tarefas)
-    return(
+
+const Aside: React.FC<AsideProps> = ({ tarefas,selecionaTarefa }) => {
+    console.log(tarefas);
+
+    return (
         <>
-        <aside className="listaTarefas">
-            <h2 >Estudos do dia:</h2>
-            {Array.isArray(tarefas)&&tarefas.map((tarefa, index) => (
-                <Lists key={index} title={tarefa.tarefa} duracao={tarefa.tempo}/>
-            ))}
-        </aside>
+            <aside className="listaTarefas">
+                <h2>Estudos do dia:</h2>
+                {Array.isArray(tarefas) && tarefas.map((tarefa, index) => (
+                    <Lists
+                        key={index}
+                        tarefa={tarefa.tarefa}
+                        tempo={tarefa.tempo}
+                        selecionado={tarefa.selecionado}
+                        completado={tarefa.completado}
+                        id={tarefa.id}
+                        selecionaTarefa={selecionaTarefa}
+                       
+                    />
+                ))}
+            </aside>
         </>
-    )
+    );
 }
-export default Aside
+
+export default Aside;

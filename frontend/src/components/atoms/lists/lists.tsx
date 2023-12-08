@@ -1,17 +1,24 @@
 import React from "react"
 import style from './styles.module.scss'
+import tipoTarefas from "../../interfaces"
 
-interface ListsProps{
-    title: string,
-    duracao: string;
-}
-const Lists: React.FC<ListsProps> = ({title,duracao})=>{
+interface propsLists extends tipoTarefas{
+   
+    selecionaTarefa: (tarefaSelecionada:tipoTarefas)=>void;}
+
+const Lists: React.FC<propsLists> = ({tarefa,tempo, selecionado,completado,id, selecionaTarefa})=>{
     return(
         <>
             <ul>
-                <li className={style.item}>
-                    <h3>{title}</h3>
-                    <p>{duracao}</p>
+                <li className={style.item} onClick={()=>selecionaTarefa({
+                    tarefa,
+                    tempo,
+                    selecionado,
+                    completado,
+                    id
+                })}>
+                    <h3>{tarefa}</h3>
+                    <p>{tempo}</p>
                 </li>
             </ul>
         </>
