@@ -1,7 +1,7 @@
 interface tipoTarefas{
         tarefa: string,
         tempo: string,
-        selecionado:boolean,
+        selecionado:boolean ,
         completado:boolean,
         id: string
 }

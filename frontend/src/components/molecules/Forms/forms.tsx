@@ -9,6 +9,7 @@ interface formsProps{
     setTarefas: React.Dispatch<SetStateAction<{ tarefa: string; tempo: string; selecionado: boolean, completado:boolean, id:string }[]>>;
 }
 const Forms: React.FC<formsProps> = ({setTarefas})=>{
+
     function handleSubmit(e:any){
         e.preventDefault();
         const tarefa = e.currentTarget.tarefa.value;

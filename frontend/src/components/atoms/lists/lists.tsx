@@ -10,7 +10,7 @@ const Lists: React.FC<propsLists> = ({tarefa,tempo, selecionado,completado,id, s
     return(
         <>
             <ul>
-                <li className={style.item} onClick={()=>selecionaTarefa({
+                <li className={`${style.item} ${selecionado ? style.itemSelecionado : ''}`} onClick={()=>selecionaTarefa({
                     tarefa,
                     tempo,
                     selecionado,
