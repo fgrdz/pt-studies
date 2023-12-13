@@ -5,12 +5,14 @@ import './style.scss'
 
 interface AsideProps {
     tarefas: tipoTarefas[],
-    selecionaTarefa: (tarefaSelecionada:tipoTarefas)=>void;
+    selecionaTarefa: (tarefaSelecionada:tipoTarefas)=>void,
+    handleRemove: (handleRemove:tipoTarefas)=>void;
     
 }
 
-const Aside: React.FC<AsideProps> = ({ tarefas,selecionaTarefa }) => {
-    console.log(tarefas);
+const Aside: React.FC<AsideProps> = ({ tarefas,selecionaTarefa,handleRemove }) => {
+    
+
 
     return (
         <>
@@ -25,6 +27,7 @@ const Aside: React.FC<AsideProps> = ({ tarefas,selecionaTarefa }) => {
                         completado={tarefa.completado}
                         id={tarefa.id}
                         selecionaTarefa={selecionaTarefa}
+                        handleRemove={handleRemove}
                        
                     />
                 ))}

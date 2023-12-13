@@ -3,6 +3,11 @@ ul {
     overflow-y: scroll;
       scrollbar-width: thin;
   }
+a{
+  font-size: 1rem;
+  margin: 10px;
+  color: aquamarine;
+}
 .item {
     background-color: #4D4D4D;
     border-radius: 8px;
@@ -24,6 +29,7 @@ ul {
     @media screen and (min-width:1280px) {
       font-size: 1.8rem;
     }
+
   }
   
   .itemSelecionado {
@@ -47,4 +53,5 @@ ul {
       width: 42px;
       height: 43px;
     }
+
   }

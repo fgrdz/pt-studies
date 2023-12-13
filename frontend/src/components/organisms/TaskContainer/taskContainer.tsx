@@ -15,6 +15,7 @@ interface arrayTarefas{
 }
 
 const TaskContainer = ()=>{
+    
     const [tarefas, setTarefas] = useState([{
         tarefa: 'Example',
           tempo: '02:00',
@@ -31,12 +32,33 @@ const TaskContainer = ()=>{
                 selecionado:tarefa.id === tarefaSelecionada.id ? true : false
             })));
      }
+     function finalizarTarefa(){
+        if(selecionado){
+            setSelecionado(undefined)
+            setTarefas(tarefasAnteriores =>tarefasAnteriores.map(tarefa =>{
+                if (tarefa.id === selecionado.id){
+                    return{
+                        ...tarefa,
+                        selecionado:false,
+                        completado:true
+                    }
+                }
+                return tarefa;
+            }))
+        }
+     }
+     function handleRemove(id:any){
+        const novasTarefas = [...tarefas]
+        const index = novasTarefas.findIndex((tarefa=> tarefa.id === id))
+        novasTarefas.splice(index,1)
+        setTarefas(novasTarefas)
+     }
     return(
         <>
             <Forms setTarefas={setTarefas}/>
-            <Aside tarefas={tarefas} selecionaTarefa={selecionaTarefa}/>
-            <Cronometer selecionado={selecionado}/>
-            {selecionado?.tempo}
+            <Aside tarefas={tarefas} selecionaTarefa={selecionaTarefa} handleRemove={handleRemove}/>
+            <Cronometer  selecionado={selecionado} finalizarTarefa={finalizarTarefa}/>
+           
         </>
     )
 }

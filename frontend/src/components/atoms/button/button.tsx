@@ -2,12 +2,13 @@ import style from './style.module.scss'
 
 interface ButtonProps{
  
-    buttonName: string
+    buttonName: string,
+    onClick?: ()=> void
 }
-const Button: React.FC<ButtonProps>= ({buttonName})=>{
+const Button: React.FC<ButtonProps>= ({buttonName, onClick})=>{
     return(
         <>
-            <button  className={style.botao}>{buttonName}</button>
+            <button onClick={onClick}  className={style.botao}>{buttonName}</button>
         </>
     )
 }

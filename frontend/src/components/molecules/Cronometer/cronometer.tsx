@@ -6,10 +6,12 @@ import style from './cronometer.module.scss';
 
 interface propsCronometro {
   selecionado: tipoTarefas | undefined;
+  finalizarTarefa: () => void;
 }
 
-const Cronometer: React.FC<propsCronometro> = ({ selecionado }) => {
+const Cronometer: React.FC<propsCronometro> = ({ selecionado, finalizarTarefa }) => {
   const [tempo, setTempo] = useState<number | undefined>(undefined);
+  const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
     if (selecionado?.tempo) {
@@ -17,11 +19,33 @@ const Cronometer: React.FC<propsCronometro> = ({ selecionado }) => {
     }
   }, [selecionado]);
 
+  useEffect(() => {
+    let intervalId: NodeJS.Timeout;
+
+    if (isRunning) {
+      intervalId = setInterval(() => {
+        setTempo((prevTempo) => {
+          if (prevTempo && prevTempo > 0) {
+            return prevTempo - 1;
+          } else {
+            clearInterval(intervalId);
+            finalizarTarefa();
+            return 0;
+          }
+        });
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [isRunning, finalizarTarefa]);
+
   function conversionTime(tempo: string) {
-    const timeParts = tempo.split(':').map(part => parseInt(part, 10));
+    const timeParts = tempo.split(':').map((part) => parseInt(part, 10));
     const isValidTime =
-      timeParts.every(part => !isNaN(part)) && (timeParts.length === 2 || timeParts.length === 3);
-  
+      timeParts.every((part) => !isNaN(part)) && (timeParts.length === 2 || timeParts.length === 3);
+
     if (isValidTime) {
       const [horas, minutos, segundos = 0] = timeParts;
       const horasEmSegundos = horas * 3600;
@@ -29,8 +53,12 @@ const Cronometer: React.FC<propsCronometro> = ({ selecionado }) => {
       return horasEmSegundos + minutosEmSegundos + segundos;
     } else {
       console.error('Invalid time format:', tempo);
-      return 0; // or return undefined; based on your use case
+      return 0;
     }
+  }
+
+  function handlePause() {
+    setIsRunning(false);
   }
 
   return (
@@ -40,10 +68,18 @@ const Cronometer: React.FC<propsCronometro> = ({ selecionado }) => {
         <div className={style.relogioWrapper}>
           <Relogio tempo={tempo} />
         </div>
-        <Button buttonName="Iniciar" />
+        <div className={style.divButton}>
+          <Button
+            onClick={() => {
+              setIsRunning((prevIsRunning) => !prevIsRunning);
+            }}
+            buttonName={isRunning ? 'Pausar' : 'Iniciar'}
+          />
+        </div>
       </div>
     </>
   );
 };
 
 export default Cronometer;
+
