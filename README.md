@@ -5,6 +5,7 @@ Fiz essa atividade para praticar o desenvolvimento frontend com typescript, tamb
 ##
 ### Funcionalidades
 - Adicionar atividades em lista
+- Alternar entre portugues e ingles
 - Excluir as atividades da lista
 - Iniciar a atividade com o cronômetro da página
 #

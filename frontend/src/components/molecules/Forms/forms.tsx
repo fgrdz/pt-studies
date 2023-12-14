@@ -4,11 +4,13 @@ import Input from "../../atoms/input/input"
 import Label from "../../atoms/label/label"
 import style from './style.module.scss'
 import {v4 as uuidv4} from 'uuid'
+import { useTranslation } from 'react-i18next';
 
 interface formsProps{
     setTarefas: React.Dispatch<SetStateAction<{ tarefa: string; tempo: string; selecionado: boolean, completado:boolean, id:string }[]>>;
 }
 const Forms: React.FC<formsProps> = ({setTarefas})=>{
+    const  {t}= useTranslation();
 
     function handleSubmit(e:any){
         e.preventDefault();
@@ -28,7 +30,7 @@ const Forms: React.FC<formsProps> = ({setTarefas})=>{
             <form onSubmit={handleSubmit} className={style.novaTarefa}>
                 <div className={style.inputContainer}>
                     <Label
-                        name="Tarefa"
+                        name={t('task')}
                         HtmlFor="tarefa"
                     />
                     <Input
@@ -54,7 +56,7 @@ const Forms: React.FC<formsProps> = ({setTarefas})=>{
                     
                     />
                 </div>
-                <Button  buttonName="Adicionar"/>
+                <Button  buttonName={t('buttonAdd')}/>
             </form>
         </>
     )

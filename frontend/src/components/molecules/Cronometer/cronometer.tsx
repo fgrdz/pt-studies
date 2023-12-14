@@ -3,6 +3,7 @@ import Relogio from '../../atoms/Relogio/Relogio';
 import Button from '../../atoms/button/button';
 import tipoTarefas from '../../interfaces';
 import style from './cronometer.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface propsCronometro {
   selecionado: tipoTarefas | undefined;
@@ -10,6 +11,7 @@ interface propsCronometro {
 }
 
 const Cronometer: React.FC<propsCronometro> = ({ selecionado, finalizarTarefa }) => {
+  const{t}= useTranslation();
   const [tempo, setTempo] = useState<number | undefined>(undefined);
   const [isRunning, setIsRunning] = useState(false);
 
@@ -64,7 +66,7 @@ const Cronometer: React.FC<propsCronometro> = ({ selecionado, finalizarTarefa })
   return (
     <>
       <div className={style.cronometro}>
-        <p className={style.titulo}>Escolha uma atividade e inicie o cronômetro</p>
+        <p className={style.titulo}>{t('pickOne')}</p>
         <div className={style.relogioWrapper}>
           <Relogio tempo={tempo} />
         </div>
@@ -73,7 +75,7 @@ const Cronometer: React.FC<propsCronometro> = ({ selecionado, finalizarTarefa })
             onClick={() => {
               setIsRunning((prevIsRunning) => !prevIsRunning);
             }}
-            buttonName={isRunning ? 'Pausar' : 'Iniciar'}
+            buttonName={isRunning ? t('pause') : t('start')}
           />
         </div>
       </div>

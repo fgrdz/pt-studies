@@ -1,3 +1,4 @@
+import LanguageSelector from "../../../languages/LanguageSelector";
 import tipoTarefas from "../../interfaces";
 import Aside from "../../molecules/Aside/aside"
 import Cronometer from "../../molecules/Cronometer/cronometer";
@@ -55,6 +56,7 @@ const TaskContainer = ()=>{
      }
     return(
         <>
+           
             <Forms setTarefas={setTarefas}/>
             <Aside tarefas={tarefas} selecionaTarefa={selecionaTarefa} handleRemove={handleRemove}/>
             <Cronometer  selecionado={selecionado} finalizarTarefa={finalizarTarefa}/>
