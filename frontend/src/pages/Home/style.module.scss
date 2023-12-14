@@ -9,13 +9,14 @@
     row-gap: 24px;
     min-width: 320px;
     min-height: calc(100vh - 32px);
-    width: 100%;
+   
     padding: 32px;
     box-sizing: border-box;
     border-radius: 10px;
     background-color: #171717;
   
     @media screen and (min-width:1280px)  {
+      margin: 26px;
       grid-template-areas: 
       "nova-tarefa tarefas"
       "cronometro tarefas"
@@ -28,3 +29,10 @@
       padding: 64px;
     }
   }
+
+  .language{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
